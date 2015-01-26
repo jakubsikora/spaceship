@@ -5,9 +5,6 @@ function Debris(startPos) {
     , angle = 0
     , thrust = false
     , angleVel = 0
-    , FRICTION_FACTOR = 0.02
-    , SHIP_SPEED = 0.15
-    , IMAGE_SIZE = [640, 480]
     , IMAGE_SRC = 'img/debris2_blue.png';
 
 
@@ -31,15 +28,15 @@ function Debris(startPos) {
     pos[1] -= vel[1];
 
     // Check canvas borders
-    if (-pos[0] > IMAGE_SIZE[0]) {
+    if (-pos[0] > DEBRIS_SIZE[0]) {
       pos[0] = canvas.width;
     } else if (pos[0] > canvas.width) {
-      pos[0] = 0 - IMAGE_SIZE[0];
+      pos[0] = 0 - DEBRIS_SIZE[0];
     }
 
     if (pos[1] > canvas.height) {
-      pos[1] = 0 - IMAGE_SIZE[1];
-    } else if(-pos[1] > IMAGE_SIZE[1]) {
+      pos[1] = 0 - DEBRIS_SIZE[1];
+    } else if(-pos[1] > DEBRIS_SIZE[1]) {
       pos[1] = canvas.height;
     }
   };
@@ -72,6 +69,6 @@ function Debris(startPos) {
     draw: draw,
     update: update,
     setPos: setPos,
-    IMAGE_SIZE: IMAGE_SIZE
+    DEBRIS_SIZE: DEBRIS_SIZE
   }
 }

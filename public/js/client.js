@@ -3,9 +3,17 @@ var canvas
   , ship
   , debris
   , keys
-  , time;
+  , time
+  , DEBRIS_SIZE = [640, 480]
+  , FRICTION_FACTOR = 0.02
+  , SHIP_SPEED = 0.15
+  , SHIP_TURN_ANGLE = 0.07
+  , SHIP_SIZE = [90,90];
+
 
 function init() {
+  var numberDebris;
+
   canvas = document.getElementById('canvas');
   ctx = canvas.getContext('2d');
 
@@ -22,20 +30,15 @@ function init() {
 
   debris = [];
 
-  debris.push(new Debris([0, 0]));
-  debris.push(new Debris([canvas.width / 3, 0]));
-  debris.push(new Debris([canvas.width / 1.5, 0]));
-  debris.push(new Debris([canvas.width, 0]));
+  numberDebris = ((canvas.width + DEBRIS_SIZE[0]) / DEBRIS_SIZE[0]);
 
-  debris.push(new Debris([0, canvas.height / 3]));
-  debris.push(new Debris([canvas.width / 3, canvas.height / 3]));
-  debris.push(new Debris([canvas.width / 1.5, canvas.height / 3]));
-  debris.push(new Debris([canvas.width, canvas.height / 3]));
+  for (var i = 0; i < numberDebris; i++) {
+    debris.push(new Debris(
+      [i * DEBRIS_SIZE[0], 0]));
 
-  debris.push(new Debris([0, canvas.height]));
-  debris.push(new Debris([canvas.width / 3, canvas.height]));
-  debris.push(new Debris([canvas.width / 1.5, canvas.height]));
-  debris.push(new Debris([canvas.width, canvas.height]));
+    debris.push(new Debris(
+      [i * DEBRIS_SIZE[0], DEBRIS_SIZE[1]]));
+  }
 
   // Start listening for events
   setEventHandlers();
@@ -68,19 +71,15 @@ function draw() {
   // Wipe the canvas clean
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Draw the ship
-  ship.draw(ctx);
 
   for (var i = 0; i < debris.length; i++) {
     debris[i].draw(ctx);
   };
 
+  // Draw the ship
+  ship.draw(ctx);
+
   document.getElementById('canvasHud').innerHTML = canvas.width + ', ' + canvas.height;
-  // canvas.draw_image(debris_image,
-  //   [center[0]-wtime, center[1]], // image center
-  //   [size[0]-2*wtime, size[1]], // image size
-  //   [width/2+1.25*wtime, height/2], // pos
-  //   [width-2.5*wtime, height]) // image size ?
 }
 
 function setEventHandlers() {

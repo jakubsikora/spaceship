@@ -7,10 +7,6 @@ function Ship(startPos, startVel) {
     , angleVel = 0
     , STATIC_SHIP_CENTER = [45, 45]
     , MOTION_SHIP_CENTER = [135, 45]
-    , SHIP_SIZE = [90,90]
-    , SHIP_SPEED = 0.15
-    , FRICTION_FACTOR = 0.02
-    , SHIP_TURN_ANGLE = 0.07
     , IMAGE_SRC = 'img/falcon_millenium.png';
 
   var setThrust = function(newThrust) {

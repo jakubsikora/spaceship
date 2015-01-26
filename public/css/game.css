@@ -1,6 +1,8 @@
 body {
   overflow: hidden;
-  background:url(/img/bg.jpg);
+  /*background:url(/img/bg.jpg);*/
+  background:url(https://bplusmovieblog.files.wordpress.com/2013/04/return-of-the-jedi-4.png);
+  background-size: cover;
 }
 
 canvas {
