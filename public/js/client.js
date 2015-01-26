@@ -37,9 +37,6 @@ function init() {
   debris.push(new Debris([canvas.width / 1.5, canvas.height]));
   debris.push(new Debris([canvas.width, canvas.height]));
 
-  // debris.push(new Debris([0, canvas.height / 2]));
-  // debris.push(new Debris([canvas.width / 2, canvas.height / 2]));
-
   // Start listening for events
   setEventHandlers();
 

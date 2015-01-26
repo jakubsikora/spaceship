@@ -17,6 +17,7 @@ canvas {
 }
 
 .debrisHud {
+  display: none;
   position: absolute;
   border: 1px solid #555;
   top: 0;

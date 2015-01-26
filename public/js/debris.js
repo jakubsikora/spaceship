@@ -42,17 +42,6 @@ function Debris(startPos) {
     } else if(-pos[1] > IMAGE_SIZE[1]) {
       pos[1] = canvas.height;
     }
-    // if (pos[0] > canvas.width) {
-    //   pos[0] = pos[0] % canvas.width;
-    // } else if (pos[0] < 0) {
-    //   pos[0] = canvas.width + (pos[0] % canvas.width);
-    // }
-
-    // if (pos[1] > canvas.height) {
-    //   pos[1] = pos[1] % canvas.height;
-    // } else if (pos[1] < 0) {
-    //   pos[1] = canvas.height + (pos[1] % canvas.height);
-    // }
   };
 
   var draw = function(ctx) {
