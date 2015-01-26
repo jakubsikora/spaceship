@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+    <title>Spaceship</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="css/game.css">
+  </head>
+
+  <body>
+    <table class='shipHud'>
+      <tr>
+        <td>Canvas</td>
+        <td id='canvasHud'></td>
+      </tr>
+      <tr>
+        <td>Pos</td>
+        <td id='shipPos'></td>
+      </tr>
+      <tr>
+        <td>Vel</td>
+        <td id='shipVel'></td>
+      </tr>
+      <tr>
+        <td>Forward</td>
+        <td id='shipForward'></td>
+      </tr>
+      <tr>
+        <td>Thrust</td>
+        <td id='shipThrust'></td>
+      </tr>
+      <tr>
+        <td>Angle</td>
+        <td id='shipAngle'></td>
+      </tr>
+      <tr>
+        <td>Angle Vel</td>
+        <td id='shipAngleVel'></td>
+      </tr>
+    </table>
+
+    <table class='debrisHud'>
+      <tr>
+        <td>Pos</td>
+        <td id='debrisPos'></td>
+      </tr>
+      <tr>
+        <td>Vel</td>
+        <td id='debrisVel'></td>
+      </tr>
+      <tr>
+        <td>Forward</td>
+        <td id='debrisForward'></td>
+      </tr>
+      <tr>
+        <td>Angle</td>
+        <td id='debrisAngle'></td>
+      </tr>
+      <tr>
+        <td>Angle Vel</td>
+        <td id='debrisAngleVel'></td>
+      </tr>
+    </table>
+
+
+    <canvas id="canvas"></canvas>
+
+    <script src="js/requestAnimationFrame.js"></script>
+    <script src="js/client.js"></script>
+    <script src="js/ship.js"></script>
+    <script src="js/debris.js"></script>
+    <script>
+      // Initialise the game
+      init();
+      animate();
+    </script>
+  </body>
+</html>

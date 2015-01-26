@@ -1,0 +1,26 @@
+body {
+  overflow: hidden;
+  background:url(/img/bg.jpg);
+}
+
+canvas {
+  display: block;
+}
+
+.shipHud {
+  position: absolute;
+  border: 1px solid #555;
+  top: 0;
+  right: 0;
+  color: #FFF;
+  width: 180px;
+}
+
+.debrisHud {
+  position: absolute;
+  border: 1px solid #555;
+  top: 0;
+  right: 180px;
+  color: #FFF;
+  width: 180px;
+}
