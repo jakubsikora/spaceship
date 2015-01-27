@@ -1,29 +1,36 @@
 body {
   overflow: hidden;
-  /*background:url(/img/bg.jpg);*/
-  background:url(https://bplusmovieblog.files.wordpress.com/2013/04/return-of-the-jedi-4.png);
-  background-size: cover;
+}
+
+.container {
+  padding: 0;
 }
 
 canvas {
+  background:url(/img/bg.jpg) no-repeat center center;
+  background-size: cover;
   display: block;
+  width: 100%;
 }
 
 .shipHud {
+  font-size: 0.8em;
   position: absolute;
-  border: 1px solid #555;
-  top: 0;
+  top: 50px;
   right: 0;
   color: #FFF;
   width: 180px;
 }
 
-.debrisHud {
-  display: none;
-  position: absolute;
-  border: 1px solid #555;
-  top: 0;
-  right: 180px;
-  color: #FFF;
-  width: 180px;
+.carousel {
+  margin-top: 50px;
+}
+
+.carousel .item > img {
+  height: 600px;
+  text-align: center;
+}
+
+.carousel-caption {
+  background: #000;
 }

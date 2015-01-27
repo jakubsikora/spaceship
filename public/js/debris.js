@@ -1,11 +1,13 @@
-function Debris(startPos) {
+function Debris(startPos, startSpeedFactor, startScale) {
   var pos = startPos
     , vel = [0, 0]
     , forward = [0, 0]
     , angle = 0
     , thrust = false
     , angleVel = 0
-    , IMAGE_SRC = 'img/debris2_blue.png';
+    , IMAGE_SRC = 'img/debris2.png'
+    , speedFactor = startSpeedFactor || 1
+    , scale = startScale || 1;
 
 
   var setPos = function(newPos) {
@@ -20,8 +22,8 @@ function Debris(startPos) {
     forward = angleToVector(angle);
 
     if (thrust) {
-      vel[0] += forward[0] * SHIP_SPEED;
-      vel[1] += forward[1] * SHIP_SPEED;
+      vel[0] += forward[0] * SHIP_SPEED * speedFactor;
+      vel[1] += forward[1] * SHIP_SPEED * speedFactor;
     }
 
     pos[0] -= vel[0];
@@ -42,23 +44,13 @@ function Debris(startPos) {
   };
 
   var draw = function(ctx) {
-    log();
-
     var debrisImage = new Image();
     debrisImage.src = IMAGE_SRC;
 
+    ctx.save();
+    ctx.scale(scale[0], scale[1]);
     ctx.drawImage(debrisImage, pos[0], pos[1]);
-  };
-
-  var log = function() {
-    document.getElementById('debrisPos').innerHTML =
-      parseInt(pos[0], 10) + ', ' + parseInt(pos[1], 10);
-    document.getElementById('debrisVel').innerHTML =
-      parseFloat(vel[0]).toFixed(2) + ', ' + parseFloat(vel[1]).toFixed(2);
-    document.getElementById('debrisForward').innerHTML =
-      parseFloat(forward[0]).toFixed(2) + ', ' + parseFloat(forward[1]).toFixed(2);
-    document.getElementById('debrisAngle').innerHTML = parseFloat(angle).toFixed(2);
-    document.getElementById('debrisAngleVel').innerHTML = angleVel;
+    ctx.restore();
   };
 
   var angleToVector = function(newAngle) {

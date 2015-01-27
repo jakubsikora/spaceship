@@ -3,10 +3,25 @@
 <html lang="en">
 
   <head>
-    <title>Spaceship</title>
     <meta charset="utf-8">
+    <title>Multi-astro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <link rel="stylesheet" href="css/game.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/game.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -41,40 +56,82 @@
       </tr>
     </table>
 
-    <table class='debrisHud'>
-      <tr>
-        <td>Pos</td>
-        <td id='debrisPos'></td>
-      </tr>
-      <tr>
-        <td>Vel</td>
-        <td id='debrisVel'></td>
-      </tr>
-      <tr>
-        <td>Forward</td>
-        <td id='debrisForward'></td>
-      </tr>
-      <tr>
-        <td>Angle</td>
-        <td id='debrisAngle'></td>
-      </tr>
-      <tr>
-        <td>Angle Vel</td>
-        <td id='debrisAngleVel'></td>
-      </tr>
-    </table>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Multi-astro</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
 
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
-    <canvas id="canvas"></canvas>
+    <div class="container-fluid">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <div id="carousel-select-ship" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-select-ship" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-select-ship" data-slide-to="1"></li>
+        <li data-target="#carousel-select-ship" data-slide-to="2"></li>
+      </ol>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src="img/carousel-falcon-millenium.png">
+          <div class="carousel-caption">
+              <h3><a href='#' onclick='chooseShip("falcon")'>Select Falcon Millenium</a></h3>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/carousel-t47.png">
+          <div class="carousel-caption">
+              <h3><a href='#' onclick='chooseShip("t47")'>Select T47 Air (snow) Speeder</a></h3>
+          </div>
+        </div>
+        <div class="item">
+          <img src="img/carousel-t65.png" alt="...">
+          <div class="carousel-caption">
+              <h3><a href='#' onclick='chooseShip("t65")'>Select T65 X-Wing Star fighter</a></h3>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-select-ship" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-select-ship" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div> <!-- Carousel -->
 
     <script src="js/requestAnimationFrame.js"></script>
     <script src="js/client.js"></script>
     <script src="js/ship.js"></script>
     <script src="js/debris.js"></script>
+    <script src="js/missile.js"></script>
     <script>
       // Initialise the game
-      init();
-      animate();
+      if (STARTED) {
+        init();
+        animate();
+      } else {
+        document.getElementById('canvas').style.display = 'none';
+        $('.carousel').carousel({
+            interval: 8000
+        })
+      }
     </script>
   </body>
 </html>

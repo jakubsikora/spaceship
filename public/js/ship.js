@@ -5,9 +5,8 @@ function Ship(startPos, startVel) {
     , thrust = false
     , angle = 0
     , angleVel = 0
-    , STATIC_SHIP_CENTER = [45, 45]
-    , MOTION_SHIP_CENTER = [135, 45]
-    , IMAGE_SRC = 'img/falcon_millenium.png';
+    , MISSILE_SPEED_FACTOR = 5
+    , IMAGE_SIZE = [0, 0];
 
   var setThrust = function(newThrust) {
     thrust = newThrust;
@@ -62,14 +61,18 @@ function Ship(startPos, startVel) {
     log();
 
     shipImage = new Image();
+    shipImage.onload = function() {
+      IMAGE_SIZE = [shipImage.width / 2, shipImage.height];
+    };
+
     shipImage.src = IMAGE_SRC;
 
     drawSprite(shipImage, pos[0], pos[1], angle, thrust)
   };
 
   var drawSprite = function(imageObject, x, y, rotation, thrust) {
-      var cx = pos[0] + (0.5 * SHIP_SIZE[0])
-        , cy = pos[1] + (0.5 * SHIP_SIZE[1]);
+      var cx = pos[0] + (0.5 * IMAGE_SIZE[0])
+        , cy = pos[1] + (0.5 * IMAGE_SIZE[1]);
 
       // save state
       ctx.save();
@@ -82,17 +85,28 @@ function Ship(startPos, startVel) {
       // destinationX, destinationY, destinationWidth, destinationHeight)
       ctx.drawImage(
         imageObject,
-        (thrust ? SHIP_SIZE[0] : 0),
+        (thrust ? IMAGE_SIZE[0] : 0),
         0,
-        SHIP_SIZE[0],
-        SHIP_SIZE[1],
-        -SHIP_SIZE[0]/2,
-        -SHIP_SIZE[1]/2,
-        SHIP_SIZE[0],
-        SHIP_SIZE[1]);
+        IMAGE_SIZE[0],
+        IMAGE_SIZE[1],
+        -IMAGE_SIZE[0]/2,
+        -IMAGE_SIZE[1]/2,
+        IMAGE_SIZE[0],
+        IMAGE_SIZE[1]);
 
       // restore state
       ctx.restore();
+  };
+
+  var shoot = function() {
+    var missile = new Missile(
+      [pos[0] + IMAGE_SIZE[0] / 2,
+      pos[1] + IMAGE_SIZE[1] / 2],
+      [vel[0] + forward[0] * MISSILE_SPEED_FACTOR,
+      vel[1] + forward[1] * MISSILE_SPEED_FACTOR],
+      angle
+    );
+    missileGroup.push(missile);
   };
 
   var log = function() {
@@ -118,6 +132,7 @@ function Ship(startPos, startVel) {
     getThrust: getThrust,
     getAngleVel: getAngleVel,
     setAngleVel: setAngleVel,
+    shoot: shoot,
     SHIP_TURN_ANGLE: SHIP_TURN_ANGLE
   }
 }
