@@ -1,4 +1,5 @@
-var canvas
+var socket = io()
+  , canvas
   , ctx
   , ship
   , debris
