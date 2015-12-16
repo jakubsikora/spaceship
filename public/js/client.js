@@ -3,6 +3,8 @@ var socket = io()
   , ctx
   , ship
   , debris
+  , rocks = []
+  , MAX_ROCKS = 10
   , keys
   , time
   , DEBRIS_SIZE = [2000, 2000]
@@ -46,6 +48,8 @@ function init() {
     , startVel = [0, 0];
 
   ship = new Ship(startPos, startVel);
+
+  setInterval(spawnRock, 1000);
 
   debris = [];
 
@@ -112,6 +116,10 @@ function update() {
       }
     }
   }
+
+  for (var i = 0; i < rocks.length; i++) {
+    rocks[i].update();
+  };
 }
 
 function draw() {
@@ -123,6 +131,10 @@ function draw() {
 
   for (var i = 0; i < debris.length; i++) {
     debris[i].draw(ctx);
+  };
+
+  for (var i = 0; i < rocks.length; i++) {
+    rocks[i].draw(ctx);
   };
 
   // Draw the ship
@@ -187,4 +199,27 @@ function onKeyup(e) {
       ship.setAngleVel(0);
       break;
   };
+}
+
+function spawnRock() {
+  if (rocks.length >= MAX_ROCKS) return;
+
+  var posX = getRandom(0, canvas.width);
+  var posY = getRandom(0, canvas.height);
+
+  ASTEROID_SPEED_FACTOR = 0.5;
+  ASTEROID_TURN_ANGLE_MAX = 0.07;
+  ASTEROID_TURN_ANGLE_MIN = -0.07;
+
+  rocks.push(new Rock(
+    [posX, posY],
+    [ getRandom(-ASTEROID_SPEED_FACTOR, ASTEROID_SPEED_FACTOR),
+      getRandom(-ASTEROID_SPEED_FACTOR, ASTEROID_SPEED_FACTOR)],
+    0,
+    getRandom(-0.01, 0.01)
+  ));
+}
+
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
 }
